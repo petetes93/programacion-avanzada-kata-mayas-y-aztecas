@@ -4,48 +4,56 @@ class Warrior {
         this.power = power
     }
 
-    attack () {
-    
-        console.log(`${this.power} golpea al contrincante`);
+    attack(target) {
+        console.log(`${this.constructor.name} ataca a ${target.constructor.name}.`);
     }
 
     defend(damage) {
-        let vida = `${this.power}-${this.life}`
-        console.log(`Daño recibido: ${vida}`);
-        
+        console.log(`${this.constructor.name} defiende.`);
     }
 
 }
 
 
 class Maya extends Warrior {
-        constructor(nombre){
-            super (nombre);
-            this.nombre = nombre
-        }
-      colacao (){
-        console.log(`${this.nombre} drinkColaCao suma 10 ${this.life}`);
+    constructor(nombre) {
+        super(100, 100); 
+        this.nombre = nombre;
     }
-   
+
+    colacao() {
+        console.log(`${this.nombre} bebe ColaCao y suma 10 de vida.`);
+        this.life += 10;
+    }
 }
+
 
 class Aztec extends Warrior {
-     nesquik (){
-        console.log(`drinkNesquik suma 10 ${this.life}`);
+    constructor(nombre) {
+        super(100, 100); 
+        this.nombre = nombre;
     }
 
-    asignarAtaque(Maya, golpe){
-        console.log(``);
+    nesquik() {
+        console.log(`${this.nombre} bebe Nesquik y suma 10 de vida.`);
+        this.life += 10;
     }
-   
+
+    asignarAtaque(objetivo) {
+        console.log(`${this.nombre} asigna un ataque a ${objetivo.nombre}.`);
+        objetivo.attack(this);
+    }
 }
+   
 
-const maya1 = new Maya ('maya','100', '100')
-console.log(maya1.colacao());
+const maya1 = new Maya("Maya");
+const aztec1 = new Aztec("Azteca");
 
-const aztec1 = new Aztec ('100', '100')
-console.log(aztec1.nesquik());
+maya1.colacao();
+aztec1.nesquik();
 
-console.log(maya1.defend());
+maya1.attack(aztec1);
+aztec1.defend();
 
-console.log(maya1.colacao(),aztec1.nesquik());
+aztec1.asignarAtaque(maya1);
+maya1.defend();
